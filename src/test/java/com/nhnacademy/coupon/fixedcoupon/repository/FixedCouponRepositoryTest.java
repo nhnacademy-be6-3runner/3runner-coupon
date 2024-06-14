@@ -1,13 +1,12 @@
 package com.nhnacademy.coupon.fixedcoupon.repository;
 
 
-import com.nhnacademy.coupon.couponform.repository.CouponFormRepository;
+import com.nhnacademy.coupon.coupon.fixedcoupon.repository.FixedCouponRepository;
 import com.nhnacademy.coupon.entity.FixedCoupon.FixedCoupon;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.TestPropertySource;

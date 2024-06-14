@@ -1,11 +1,11 @@
 package com.nhnacademy.coupon.bookcoupon.repository;
 
+import com.nhnacademy.coupon.coupon.bookcoupon.repository.BookCouponRepository;
 import com.nhnacademy.coupon.entity.BookCoupon.BookCoupon;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.TestPropertySource;

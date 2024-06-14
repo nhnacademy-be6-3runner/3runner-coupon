@@ -1,18 +1,14 @@
 package com.nhnacademy.coupon.couponpolicy.repository;
 
-import com.nhnacademy.coupon.entity.RatioCoupon.RatioCoupon;
-import com.nhnacademy.coupon.entity.couponForm.CouponForm;
+import com.nhnacademy.coupon.coupon.couponpolicy.repository.CouponPolicyRepository;
 import com.nhnacademy.coupon.entity.couponpolicy.CouponPolicy;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
-import java.util.HashSet;
 import java.util.Optional;
-import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;

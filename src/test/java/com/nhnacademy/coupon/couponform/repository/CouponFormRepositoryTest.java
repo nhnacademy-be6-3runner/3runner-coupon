@@ -1,31 +1,28 @@
 package com.nhnacademy.coupon.couponform.repository;
 
-import com.nhnacademy.coupon.bookcoupon.repository.BookCouponRepository;
-import com.nhnacademy.coupon.categorycoupon.repository.CategoryCouponRepository;
+import com.nhnacademy.coupon.coupon.bookcoupon.repository.BookCouponRepository;
+import com.nhnacademy.coupon.coupon.categorycoupon.repository.CategoryCouponRepository;
+import com.nhnacademy.coupon.coupon.couponform.repository.CouponFormRepository;
 import com.nhnacademy.coupon.entity.BookCoupon.BookCoupon;
 import com.nhnacademy.coupon.entity.CatoryCoupon.CategoryCoupon;
 import com.nhnacademy.coupon.entity.FixedCoupon.FixedCoupon;
 import com.nhnacademy.coupon.entity.RatioCoupon.RatioCoupon;
 import com.nhnacademy.coupon.entity.couponForm.CouponForm;
-import com.nhnacademy.coupon.fixedcoupon.repository.FixedCouponRepository;
-import com.nhnacademy.coupon.ratiocoupon.repository.RatioCouponRepository;
+import com.nhnacademy.coupon.coupon.fixedcoupon.repository.FixedCouponRepository;
+import com.nhnacademy.coupon.coupon.ratiocoupon.repository.RatioCouponRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.catchThrowable;
-import static org.hamcrest.Matchers.any;
 import static org.mockito.Mockito.when;
 
 @DataJpaTest

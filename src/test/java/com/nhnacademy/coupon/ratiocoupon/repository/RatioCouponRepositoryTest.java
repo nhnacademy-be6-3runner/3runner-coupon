@@ -1,12 +1,11 @@
 package com.nhnacademy.coupon.ratiocoupon.repository;
 
 
-import com.nhnacademy.coupon.entity.BookCoupon.BookCoupon;
+import com.nhnacademy.coupon.coupon.ratiocoupon.repository.RatioCouponRepository;
 import com.nhnacademy.coupon.entity.RatioCoupon.RatioCoupon;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;

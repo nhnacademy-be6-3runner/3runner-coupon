@@ -1,7 +1,7 @@
 package com.nhnacademy.coupon.categorycoupon.repository;
 
 
-import com.nhnacademy.coupon.entity.BookCoupon.BookCoupon;
+import com.nhnacademy.coupon.coupon.categorycoupon.repository.CategoryCouponRepository;
 import com.nhnacademy.coupon.entity.CatoryCoupon.CategoryCoupon;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

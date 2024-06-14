@@ -1,4 +1,4 @@
-package com.nhnacademy.coupon.bookcoupon.repository;
+package com.nhnacademy.coupon.coupon.bookcoupon.repository;
 
 import com.nhnacademy.coupon.entity.BookCoupon.BookCoupon;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -85,8 +85,8 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           script: |
             cd /home/ubuntu/test
-            docker-compose pull
-            docker-compose down || true
-            docker-compose up -d
+            sudo docker-compose pull
+            sudo docker-compose down || true
+            sudo docker-compose up -d
       - name : Run SonarQube
         run : mvn clean verify sonar:sonar -Dsonar.projectKey=${{ secrets.SONAR_KEY }} -Dsonar.projectName=${{ secrets.SONAR_NAME }} -Dsonar.host.url=${{ secrets.SONAR_HOST }} -Dsonar.token=${{ secrets.SONAR_TOKEN }}

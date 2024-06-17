@@ -2,7 +2,7 @@ FROM eclipse-temurin:21-jre
 
 WORKDIR /app
 
-COPY target/hello.jar /app/hello.jar
+COPY target/coupon.jar /app/coupon.jar
 
 EXPOSE 8080
 

@@ -1,15 +1,14 @@
-package com.nhnacademy.coupon.entity.CatoryCoupon;
+package com.nhnacademy.coupon.entity.categorycoupon;
 
 
-import com.nhnacademy.coupon.entity.couponForm.CouponForm;
+import com.nhnacademy.coupon.entity.categoryfixedcoupon.CategoryFixedCoupon;
+import com.nhnacademy.coupon.entity.categoryratiocoupon.CategoryRatioCoupon;
+import com.nhnacademy.coupon.entity.couponform.CouponForm;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @AllArgsConstructor
@@ -21,10 +20,14 @@ public class CategoryCoupon {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @MapsId
+    @OneToOne
+    private CouponForm couponForm;
+
     @Setter
     private long categoryId;
 
-    @OneToMany(mappedBy ="categoryCoupon", fetch = FetchType.LAZY ,cascade = CascadeType.ALL, orphanRemoval = true)
-    Set<CouponForm> couponFormList = new HashSet<>();
+
+
 
 }

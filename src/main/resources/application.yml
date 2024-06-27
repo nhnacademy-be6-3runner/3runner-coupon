@@ -1,12 +1,15 @@
-spring:
-    application:
-        name: 3runner-coupon
+
 server:
     port: 8080
+
+
+
+
 
 logging:
     level:
         root: debug
+
 
 eureka:
     client:
@@ -15,4 +18,5 @@ eureka:
             defaultZone:
                 http://admin:1234@localhost:8761/eureka,http://admin:1234@localhost:8762/eureka
     instance:
-        prefer-ip-address: true
+        pref₩er-ip-address: true
+

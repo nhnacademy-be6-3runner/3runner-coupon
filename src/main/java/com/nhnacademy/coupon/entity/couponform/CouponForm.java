@@ -1,6 +1,7 @@
 package com.nhnacademy.coupon.entity.couponform;
 
 import java.time.ZonedDateTime;
+import java.util.UUID;
 
 import com.nhnacademy.coupon.entity.bookcoupon.BookCoupon;
 import com.nhnacademy.coupon.entity.categorycoupon.CategoryCoupon;
@@ -21,7 +22,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @NoArgsConstructor
-@AllArgsConstructor
+@AllArgsConstructor@Setter
 public class CouponForm {
 
     @Id
@@ -39,6 +40,9 @@ public class CouponForm {
     String name;
 
     @Setter
+    UUID code;
+
+    @Setter
     Integer maxPrice;
 
     @Setter
@@ -50,16 +54,12 @@ public class CouponForm {
         this.createdAt = ZonedDateTime.now();
     }
 
-    public CouponForm(ZonedDateTime startDate,ZonedDateTime endDate, String name, Integer maxPrice, Integer minPrice) {
+    public CouponForm(ZonedDateTime startDate, ZonedDateTime endDate, String name, UUID code, Integer maxPrice, Integer minPrice) {
         this.startDate = startDate;
         this.endDate = endDate;
         this.name = name;
+        this.code = code;
         this.maxPrice = maxPrice;
         this.minPrice = minPrice;
-
     }
-
-
-
-
 }

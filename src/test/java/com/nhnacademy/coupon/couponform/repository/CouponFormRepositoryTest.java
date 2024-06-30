@@ -3,10 +3,6 @@ package com.nhnacademy.coupon.couponform.repository;
 import com.nhnacademy.coupon.coupon.bookcoupon.repository.BookCouponRepository;
 import com.nhnacademy.coupon.coupon.categorycoupon.repository.CategoryCouponRepository;
 import com.nhnacademy.coupon.coupon.couponform.repository.CouponFormRepository;
-import com.nhnacademy.coupon.entity.bookcoupon.BookCoupon;
-import com.nhnacademy.coupon.entity.categorycoupon.CategoryCoupon;
-import com.nhnacademy.coupon.entity.categoryfixedcoupon.CategoryFixedCoupon;
-import com.nhnacademy.coupon.entity.categoryratiocoupon.CategoryRatioCoupon;
 import com.nhnacademy.coupon.entity.couponform.CouponForm;
 import com.nhnacademy.coupon.coupon.categoryfixedcoupon.repository.CategoryFixedCouponRepository;
 import com.nhnacademy.coupon.coupon.categoryratiocoupon.repository.CategoryRatioCouponRepository;
@@ -19,8 +15,8 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.test.context.TestPropertySource;
 
 import java.time.ZonedDateTime;
-import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
@@ -51,7 +47,7 @@ class CouponFormRepositoryTest {
         // given
         CouponForm couponForm = new CouponForm(1L,ZonedDateTime.now(),ZonedDateTime.now()
             ,ZonedDateTime.now().plusDays(10),
-            "Test Coupon",10,100 );
+            "Test Coupon",UUID.randomUUID(),10,100 );
 
         when(couponFormRepository.save(couponForm)).thenReturn(couponForm);
 
@@ -68,7 +64,7 @@ class CouponFormRepositoryTest {
         // given
         CouponForm couponForm = new CouponForm(1L,ZonedDateTime.now(),ZonedDateTime.now()
             ,ZonedDateTime.now().plusDays(10),
-            "Test Coupon",10,100 );
+            "Test Coupon",UUID.randomUUID(),10,100 );
 
 
 
@@ -91,7 +87,7 @@ class CouponFormRepositoryTest {
         // given
         CouponForm couponForm = new CouponForm(ZonedDateTime.now()
                 ,ZonedDateTime.now().plusDays(10),
-                "Test Coupon",10,100 );
+                "Test Coupon",UUID.randomUUID(),10,100 );
         when(couponFormRepository.save(couponForm)).thenReturn(couponForm);
 
 
@@ -110,7 +106,7 @@ class CouponFormRepositoryTest {
         // given
         CouponForm couponForm = new CouponForm(ZonedDateTime.now()
             ,ZonedDateTime.now().plusDays(10),
-            "Test Coupon",10,100 );
+            "Test Coupon",UUID.randomUUID(),10,100 );
         when(couponFormRepository.save(couponForm)).thenReturn(couponForm);
 
 

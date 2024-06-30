@@ -15,7 +15,7 @@ import java.util.Set;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
+@Getter@Setter
 public class CategoryFixedCoupon {
 
     @Id
@@ -24,13 +24,13 @@ public class CategoryFixedCoupon {
 
     @MapsId
     @OneToOne
-    private CategoryCoupon couponForm;
+    private CategoryCoupon categoryCoupon;
 
     @Setter
     private int price;
 
-
-
-
-
+    public CategoryFixedCoupon(CategoryCoupon categoryCoupon, int price) {
+        this.categoryCoupon = categoryCoupon;
+        this.price = price;
+    }
 }

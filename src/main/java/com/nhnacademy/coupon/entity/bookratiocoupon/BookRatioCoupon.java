@@ -16,7 +16,7 @@ import lombok.Setter;
 
 
 @Entity
-@Getter
+@Getter@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class BookRatioCoupon {
@@ -35,5 +35,9 @@ public class BookRatioCoupon {
 	@Setter
 	private Long maxDiscount;
 
-
+	public BookRatioCoupon(BookCoupon bookCoupon, double discountRate, Long maxDiscount) {
+		this.bookCoupon = bookCoupon;
+		this.discountRate = discountRate;
+		this.maxDiscount = maxDiscount;
+	}
 }

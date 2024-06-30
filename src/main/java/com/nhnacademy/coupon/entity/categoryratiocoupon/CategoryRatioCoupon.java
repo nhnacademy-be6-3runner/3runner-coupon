@@ -13,7 +13,7 @@ import lombok.Setter;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
+@Getter@Setter
 public class CategoryRatioCoupon {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,7 +21,7 @@ public class CategoryRatioCoupon {
 
     @MapsId
     @OneToOne
-    private CategoryCoupon couponForm;
+    private CategoryCoupon categoryCoupon;
 
     @Setter
     private double discountRate;
@@ -30,8 +30,9 @@ public class CategoryRatioCoupon {
     private Long maxDiscount;
 
 
-
-
-
-
+    public CategoryRatioCoupon(CategoryCoupon categoryCoupon, double discountRate, Long maxDiscount) {
+        this.categoryCoupon = categoryCoupon;
+        this.discountRate = discountRate;
+        this.maxDiscount = maxDiscount;
+    }
 }

@@ -13,7 +13,7 @@ import lombok.Setter;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
+@Getter@Setter
 public class CategoryCoupon {
 
     @Id
@@ -27,7 +27,8 @@ public class CategoryCoupon {
     @Setter
     private long categoryId;
 
-
-
-
+    public CategoryCoupon(CouponForm couponForm, long categoryId) {
+        this.couponForm = couponForm;
+        this.categoryId = categoryId;
+    }
 }

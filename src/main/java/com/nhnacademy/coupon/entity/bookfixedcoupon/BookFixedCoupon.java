@@ -16,7 +16,7 @@ import lombok.Setter;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
+@Getter@Setter
 public class BookFixedCoupon {
 
 	@Id
@@ -30,4 +30,8 @@ public class BookFixedCoupon {
 	@Setter
 	private int price;
 
+	public BookFixedCoupon(BookCoupon bookCoupon, int price) {
+		this.bookCoupon = bookCoupon;
+		this.price = price;
+	}
 }

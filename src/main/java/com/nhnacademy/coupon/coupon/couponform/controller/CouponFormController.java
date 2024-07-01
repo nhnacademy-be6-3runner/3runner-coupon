@@ -31,6 +31,6 @@ public class CouponFormController {
     public ApiResponse<List<ReadCouponFormResponse>> readPurchaseBook(
             @RequestBody ReadCouponFormRequest readCouponFormRequest
             ){
-        return ApiResponse.success(couponFormService.read(readCouponFormRequest.couponFormIds()));
+        return ApiResponse.success(couponFormService.readAll(readCouponFormRequest.couponFormIds()));
     }
 }

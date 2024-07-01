@@ -14,7 +14,8 @@ import java.util.UUID;
  */
 public interface CouponFormService {
     Long create(ZonedDateTime startDate, ZonedDateTime endDate, String name, UUID code, Integer maxPrice, Integer minPrice);
-    List<ReadCouponFormResponse> read(List<Long> couponFormIds);
+    CouponForm read(Long couponFormId);
+    List<ReadCouponFormResponse> readAll(List<Long> couponFormIds);
     void sendNoticeCouponsExpiringToday();
     void sendNoticeCouponsExpiringThreeDaysLater();
 }

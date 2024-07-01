@@ -53,11 +53,17 @@ public class CouponFormServiceImpl implements CouponFormService {
     /**
      * 쿠폰폼 읽기
      *
-     * @param couponFormIds 쿠폰폼아이디 리스트
+     * @param couponFormId 쿠폰폼아이디
      * @return 쿠폰폼
      */
     @Override
-    public List<ReadCouponFormResponse> read(List<Long> couponFormIds) {List<CouponForm> couponForms = couponFormRepository.findAllByIdIn(couponFormIds);
+    public CouponForm read(Long couponFormId) {
+        return couponFormRepository.findById(couponFormId).orElseThrow(()->new CouponFormNotExistException(""));
+    }
+
+    @Override
+    public List<ReadCouponFormResponse> readAll(List<Long> couponFormIds) {
+        List<CouponForm> couponForms = couponFormRepository.findAllByIdIn(couponFormIds);
         return couponForms.stream()
                 .map(couponForm -> ReadCouponFormResponse.builder()
                         .couponFormId(couponForm.getId())
@@ -71,7 +77,6 @@ public class CouponFormServiceImpl implements CouponFormService {
                         .build())
                 .toList();
     }
-
     /**
      * 쿠폰폼 스케쥴러 오후한시에 만료가 하루남은 쿠폰 메시지 보내는 메소드.
      *

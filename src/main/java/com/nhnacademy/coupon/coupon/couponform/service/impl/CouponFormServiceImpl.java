@@ -53,12 +53,23 @@ public class CouponFormServiceImpl implements CouponFormService {
     /**
      * 쿠폰폼 읽기
      *
-     * @param couponFormId 쿠폰폼아이디
+     * @param couponFormIds 쿠폰폼아이디 리스트
      * @return 쿠폰폼
      */
     @Override
-    public CouponForm read(Long couponFormId) {
-        return couponFormRepository.findById(couponFormId).orElseThrow(()->new CouponFormNotExistException(""));
+    public List<ReadCouponFormResponse> read(List<Long> couponFormIds) {List<CouponForm> couponForms = couponFormRepository.findAllByIdIn(couponFormIds);
+        return couponForms.stream()
+                .map(couponForm -> ReadCouponFormResponse.builder()
+                        .couponFormId(couponForm.getId())
+                        .startDate(couponForm.getStartDate())
+                        .endDate(couponForm.getEndDate())
+                        .createdAt(couponForm.getCreatedAt())
+                        .name(couponForm.getName())
+                        .code(couponForm.getCode())
+                        .maxPrice(couponForm.getMaxPrice())
+                        .minPrice(couponForm.getMinPrice())
+                        .build())
+                .toList();
     }
 
     /**

@@ -1,8 +1,10 @@
 package com.nhnacademy.coupon.coupon.couponform.service;
 
+import com.nhnacademy.coupon.coupon.couponform.dto.ReadCouponFormResponse;
 import com.nhnacademy.coupon.entity.couponform.CouponForm;
 
 import java.time.ZonedDateTime;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -12,7 +14,7 @@ import java.util.UUID;
  */
 public interface CouponFormService {
     Long create(ZonedDateTime startDate, ZonedDateTime endDate, String name, UUID code, Integer maxPrice, Integer minPrice);
-    CouponForm read(Long couponFormId);
+    List<ReadCouponFormResponse> read(List<Long> couponFormIds);
     void sendNoticeCouponsExpiringToday();
     void sendNoticeCouponsExpiringThreeDaysLater();
 }

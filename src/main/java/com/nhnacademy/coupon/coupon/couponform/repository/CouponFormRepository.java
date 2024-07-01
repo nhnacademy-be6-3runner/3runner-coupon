@@ -27,4 +27,7 @@ public interface CouponFormRepository extends JpaRepository<CouponForm, Long> {
      */
     @Query(value = "SELECT * FROM coupon_form WHERE DATE(end_date) = DATE_ADD(CURRENT_DATE, INTERVAL 3 DAY)", nativeQuery = true)
     List<CouponForm> findCouponsExpiringThreeDaysLater();
+
+
+    List<CouponForm> findAllByIdIn(List<Long> couponFormIds);
 }

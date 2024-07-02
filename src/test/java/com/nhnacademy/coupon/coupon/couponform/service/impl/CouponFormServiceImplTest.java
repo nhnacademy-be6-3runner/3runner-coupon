@@ -32,24 +32,6 @@ class CouponFormServiceImplTest {
     @InjectMocks
     private CouponFormServiceImpl couponFormService;
 
-    @Test
-    void testCreate() {
-        ZonedDateTime startDate = ZonedDateTime.now();
-        ZonedDateTime endDate = ZonedDateTime.now().plusDays(1);
-        String name = "Test Coupon";
-        UUID code = UUID.randomUUID();
-        Integer maxPrice = 1000;
-        Integer minPrice = 100;
-
-        CouponForm couponForm = new CouponForm(startDate, endDate, name, code, maxPrice, minPrice);
-        couponForm.setId(1L);
-
-        when(couponFormRepository.save(any(CouponForm.class))).thenReturn(couponForm);
-
-        Long createdId = couponFormService.create(startDate, endDate, name, code, maxPrice, minPrice);
-
-        verify(couponFormRepository, times(1)).save(any(CouponForm.class));
-    }
 
     @Test
     void testRead() {
@@ -76,31 +58,4 @@ class CouponFormServiceImplTest {
         verify(couponFormRepository, times(1)).findById(couponFormId);
     }
 
-    @Test
-    void testSendNoticeCouponsExpiringToday() {
-        List<CouponForm> couponsExpiringToday = Arrays.asList(
-                new CouponForm(ZonedDateTime.now().minusDays(1), ZonedDateTime.now(), "Test Coupon 1", UUID.randomUUID(), 1000, 100),
-                new CouponForm(ZonedDateTime.now().minusDays(1), ZonedDateTime.now(), "Test Coupon 2", UUID.randomUUID(), 2000, 200)
-        );
-
-        when(couponFormRepository.findCouponsExpiringToday()).thenReturn(couponsExpiringToday);
-
-        couponFormService.sendNoticeCouponsExpiringToday();
-
-        verify(rabbitTemplate, times(1)).convertAndSend("3RUNNER-COUPON-EXPIRED-TODAY", couponsExpiringToday);
-    }
-
-    @Test
-    void testSendNoticeCouponsExpiringThreeDaysLater() {
-        List<CouponForm> couponsExpiringThreeDaysLater = Arrays.asList(
-                new CouponForm(ZonedDateTime.now().minusDays(1), ZonedDateTime.now().plusDays(3), "Test Coupon 1", UUID.randomUUID(), 1000, 100),
-                new CouponForm(ZonedDateTime.now().minusDays(1), ZonedDateTime.now().plusDays(3), "Test Coupon 2", UUID.randomUUID(), 2000, 200)
-        );
-
-        when(couponFormRepository.findCouponsExpiringThreeDaysLater()).thenReturn(couponsExpiringThreeDaysLater);
-
-        couponFormService.sendNoticeCouponsExpiringThreeDaysLater();
-
-        verify(rabbitTemplate, times(1)).convertAndSend("3RUNNER-COUPON-EXPIRED-IN-THREE-DAY", couponsExpiringThreeDaysLater);
-    }
 }

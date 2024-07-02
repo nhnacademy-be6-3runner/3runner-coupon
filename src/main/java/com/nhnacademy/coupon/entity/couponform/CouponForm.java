@@ -3,17 +3,10 @@ package com.nhnacademy.coupon.entity.couponform;
 import java.time.ZonedDateTime;
 import java.util.UUID;
 
-import com.nhnacademy.coupon.entity.bookcoupon.BookCoupon;
-import com.nhnacademy.coupon.entity.categorycoupon.CategoryCoupon;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.PrePersist;
-import jakarta.validation.constraints.NotNull;
+import com.nhnacademy.coupon.entity.coupontype.CouponType;
+import com.nhnacademy.coupon.entity.couponusage.CouponUsage;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,29 +17,24 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor@Setter
 public class CouponForm {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
 
-    @Setter
-    ZonedDateTime startDate;
-    @Setter
-    ZonedDateTime endDate;
-    ZonedDateTime createdAt;
+    private ZonedDateTime startDate;
+    private ZonedDateTime endDate;
+    private ZonedDateTime createdAt;
 
-    @Setter
-    @NotNull
-    String name;
+    private String name;
+    private UUID code;
+    private Integer maxPrice;
+    private Integer minPrice;
 
-    @Setter
-    UUID code;
+    @ManyToOne
+    private CouponType couponType;
 
-    @Setter
-    Integer maxPrice;
-
-    @Setter
-    Integer minPrice;
+    @ManyToOne
+    private CouponUsage couponUsage;
 
 
     @PrePersist
@@ -54,12 +42,14 @@ public class CouponForm {
         this.createdAt = ZonedDateTime.now();
     }
 
-    public CouponForm(ZonedDateTime startDate, ZonedDateTime endDate, String name, UUID code, Integer maxPrice, Integer minPrice) {
+    public CouponForm(ZonedDateTime startDate, ZonedDateTime endDate, String name, UUID code, Integer maxPrice, Integer minPrice, CouponType couponType, CouponUsage couponUsage) {
         this.startDate = startDate;
         this.endDate = endDate;
         this.name = name;
         this.code = code;
         this.maxPrice = maxPrice;
         this.minPrice = minPrice;
+        this.couponType = couponType;
+        this.couponUsage = couponUsage;
     }
 }

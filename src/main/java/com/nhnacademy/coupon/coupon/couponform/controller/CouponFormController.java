@@ -1,20 +1,17 @@
 package com.nhnacademy.coupon.coupon.couponform.controller;
 
-import com.nhnacademy.coupon.coupon.couponform.dto.ReadCouponFormRequest;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.nhnacademy.coupon.coupon.couponform.dto.request.CreateCouponFormRequest;
 import com.nhnacademy.coupon.coupon.couponform.dto.ReadCouponFormResponse;
+import com.nhnacademy.coupon.coupon.couponform.dto.request.ReadCouponFormRequest;
 import com.nhnacademy.coupon.coupon.couponform.service.CouponFormService;
 import com.nhnacademy.coupon.global.util.ApiResponse;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.validation.BindingResult;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Objects;
 
 /**
  * 쿠폰 폼 컨트롤러.
@@ -25,12 +22,22 @@ import java.util.Objects;
 @RequiredArgsConstructor
 @RequestMapping("/coupon")
 public class CouponFormController {
+    private final RabbitTemplate rabbitTemplate;
     private final CouponFormService couponFormService;
+    private final ObjectMapper objectMapper;
+    private static final String queueName1 = "3RUNNER-COUPON-ISSUED";
 
-    @PostMapping("/couponForms")
-    public ApiResponse<List<ReadCouponFormResponse>> readPurchaseBook(
+
+    @PostMapping("/members/forms")
+    public ApiResponse<List<ReadCouponFormResponse>> readCouponForm(
             @RequestBody ReadCouponFormRequest readCouponFormRequest
             ){
         return ApiResponse.success(couponFormService.readAll(readCouponFormRequest.couponFormIds()));
+    }
+
+    @PostMapping("/forms")
+    public ApiResponse<Void> createCouponForm(@RequestBody CreateCouponFormRequest createCouponFormRequest) throws JsonProcessingException {
+        rabbitTemplate.convertAndSend(queueName1, objectMapper.writeValueAsString(createCouponFormRequest));
+        return ApiResponse.success(null);
     }
 }

@@ -36,8 +36,8 @@ public class CouponFormController {
     }
 
     @PostMapping("/forms")
-    public ApiResponse<Void> createCouponForm(@RequestBody CreateCouponFormRequest createCouponFormRequest) throws JsonProcessingException {
-        rabbitTemplate.convertAndSend(queueName1, objectMapper.writeValueAsString(createCouponFormRequest));
-        return ApiResponse.success(null);
+    public ApiResponse<Long> createCouponForm(@RequestBody CreateCouponFormRequest createCouponFormRequest) throws JsonProcessingException {
+        //rabbitTemplate.convertAndSend(queueName1, objectMapper.writeValueAsString(createCouponFormRequest));
+        return ApiResponse.createSuccess(couponFormService.create(createCouponFormRequest));
     }
 }

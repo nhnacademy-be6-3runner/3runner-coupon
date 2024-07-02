@@ -6,7 +6,6 @@ import com.nhnacademy.coupon.coupon.couponform.dto.request.CreateCouponFormReque
 import com.nhnacademy.coupon.coupon.couponform.service.CouponFormService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 

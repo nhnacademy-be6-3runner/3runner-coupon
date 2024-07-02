@@ -3,7 +3,7 @@ POST http://localhost:8083/coupon/types/fixes
 Content-Type: application/json
 
 {
-  "discountPrice": 100
+  "discountPrice": 1000
 }
 
 ###
@@ -13,8 +13,8 @@ POST http://localhost:8083/coupon/types/ratios
 Content-Type: application/json
 
 {
-  "discountRate": 0.2,
-  "discountMaxPrice": 500
+  "discountRate": 0.05,
+  "discountMaxPrice": 2000
 }
 
 ###
@@ -24,7 +24,7 @@ POST http://localhost:8083/coupon/usages/categories
 Content-Type: application/json
 
 {
-  "categoryIds": [1, 2, 3]
+  "categoryIds": [1, 2]
 }
 
 ###

@@ -4,6 +4,10 @@ import java.nio.channels.AlreadyBoundException;
 import java.time.ZonedDateTime;
 
 import com.nhnacademy.coupon.coupon.couponform.exception.CouponFormNotExistException;
+import com.nhnacademy.coupon.coupon.coupontype.exception.CouponTypeDoesNotExistException;
+import com.nhnacademy.coupon.coupon.couponusage.exception.CouponUsageDoesNotExistException;
+import com.nhnacademy.coupon.coupon.fixedcoupon.exception.FixedCouponDoesNotExistException;
+import com.nhnacademy.coupon.coupon.ratiocoupon.exception.RatioCouponDoesNotExistException;
 import com.nhnacademy.coupon.global.util.ApiResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.ui.Model;
@@ -46,6 +50,10 @@ public class WebControllerAdvice {
      * @return ApiResponse<ErrorResponseForm>
      */
     @ExceptionHandler({
+            CouponTypeDoesNotExistException.class,
+            CouponUsageDoesNotExistException.class,
+            FixedCouponDoesNotExistException.class,
+            RatioCouponDoesNotExistException.class,
 			CouponFormNotExistException.class,
             AlreadyBoundException.class
     })

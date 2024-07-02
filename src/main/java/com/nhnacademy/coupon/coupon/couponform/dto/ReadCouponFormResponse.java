@@ -29,6 +29,6 @@ public record ReadCouponFormResponse(
         UUID code,
         Integer maxPrice,
         Integer minPrice,
-        CouponType couponType,
-        CouponUsage couponUsage) {
+        Long couponTypeId,
+        Long couponUsageId) {
 }

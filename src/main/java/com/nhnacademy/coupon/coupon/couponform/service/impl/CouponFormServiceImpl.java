@@ -98,8 +98,8 @@ public class CouponFormServiceImpl implements CouponFormService {
                         .code(couponForm.getCode())
                         .maxPrice(couponForm.getMaxPrice())
                         .minPrice(couponForm.getMinPrice())
-                        .couponType(couponForm.getCouponType())
-                        .couponUsage(couponForm.getCouponUsage())
+                        .couponTypeId(couponForm.getCouponType().getId())
+                        .couponUsageId(couponForm.getCouponUsage().getId())
                         .build())
                 .toList();
     }

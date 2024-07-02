@@ -1,5 +1,7 @@
 package com.nhnacademy.coupon.coupon.couponform.dto;
 
+import com.nhnacademy.coupon.entity.coupontype.CouponType;
+import com.nhnacademy.coupon.entity.couponusage.CouponUsage;
 import lombok.Builder;
 
 import java.time.ZonedDateTime;
@@ -26,5 +28,7 @@ public record ReadCouponFormResponse(
         String name,
         UUID code,
         Integer maxPrice,
-        Integer minPrice) {
+        Integer minPrice,
+        CouponType couponType,
+        CouponUsage couponUsage) {
 }

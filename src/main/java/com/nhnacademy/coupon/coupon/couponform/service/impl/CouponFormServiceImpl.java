@@ -100,6 +100,8 @@ public class CouponFormServiceImpl implements CouponFormService {
                         .minPrice(couponForm.getMinPrice())
                         .couponTypeId(couponForm.getCouponType().getId())
                         .couponUsageId(couponForm.getCouponUsage().getId())
+                        .type(couponForm.getCouponType().getType())
+                        .usage(couponForm.getCouponUsage().getUsage())
                         .build())
                 .toList();
     }

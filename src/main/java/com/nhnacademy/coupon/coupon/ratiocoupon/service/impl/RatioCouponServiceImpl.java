@@ -36,7 +36,7 @@ public class RatioCouponServiceImpl implements RatioCouponService {
      */
     @Override
     public Long create(double discountRate, int discountMaxPrice) {
-        String type = createJsonType(discountRate,discountMaxPrice);
+        String type = "할인율 :" +discountRate + ", 최대할인금액 : " + discountMaxPrice;
 
         CouponType couponType = new CouponType(type);
         couponTypeRepository.save(couponType);
@@ -72,23 +72,5 @@ public class RatioCouponServiceImpl implements RatioCouponService {
                 .discountRate(ratioCoupon.getDiscountRate())
                 .discountMaxPrice(ratioCoupon.getDiscountMaxPrice())
                 .build();
-    }
-
-    private String createJsonType(double discountRate, int discountMaxPrice) {
-        try {
-            return objectMapper.writeValueAsString(new RatioCouponType(discountRate, discountMaxPrice));
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException("Error converting to JSON", e);
-        }
-    }
-
-    private static class RatioCouponType {
-        public double discountRate;
-        public int discountMaxPrice;
-
-        public RatioCouponType(double discountRate, int discountMaxPrice) {
-            this.discountRate = discountRate;
-            this.discountMaxPrice = discountMaxPrice;
-        }
     }
 }

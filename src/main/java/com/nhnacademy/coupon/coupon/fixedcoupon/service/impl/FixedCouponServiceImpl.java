@@ -35,7 +35,7 @@ public class FixedCouponServiceImpl implements FixedCouponService {
      */
     @Override
     public Long create(int discountPrice) {
-        String type = createJsonFromDiscountPrice(discountPrice);
+        String type = "고정할인금액 : " + discountPrice;
         CouponType couponType = new CouponType(type);
         couponTypeRepository.save(couponType);
 
@@ -68,13 +68,5 @@ public class FixedCouponServiceImpl implements FixedCouponService {
                 .couponTypeId(couponTypeId)
                 .discountPrice(fixedCoupon.getDiscountPrice())
                 .build();
-    }
-
-    private String createJsonFromDiscountPrice(int discountPrice) {
-        try {
-            return objectMapper.writeValueAsString(discountPrice);
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException("Error converting category IDs to JSON", e);
-        }
     }
 }

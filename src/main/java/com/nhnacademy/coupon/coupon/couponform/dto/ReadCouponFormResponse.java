@@ -30,5 +30,7 @@ public record ReadCouponFormResponse(
         Integer maxPrice,
         Integer minPrice,
         Long couponTypeId,
-        Long couponUsageId) {
+        Long couponUsageId,
+        String type,
+        String usage) {
 }

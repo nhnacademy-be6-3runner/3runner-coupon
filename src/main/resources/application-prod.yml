@@ -1,3 +1,8 @@
+spring:
+    config:
+        activate:
+            on-profile: prod
+
 eureka:
     client:
         fetch-registry: true
@@ -7,3 +12,6 @@ eureka:
     instance:
         pref₩er-ip-address: true
 
+feign:
+    bookstore:
+        url: bookstore:8081

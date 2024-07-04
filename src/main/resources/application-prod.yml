@@ -4,9 +4,9 @@ spring:
             on-profile: prod
 
     datasource:
-        url: ${MYSQL_URL}
-        username: ${MYSQL_USERNAME}
-        password: ${MYSQL_PASSWORD}
+        url: jdbc:mysql://133.186.241.167:3306/be6_3runner_coupon
+        username: be6_3runner
+        password: tHos2g5st4@XH7mT
         driver-class-name: com.mysql.cj.jdbc.Driver
         type: org.apache.commons.dbcp2.BasicDataSource
         dbcp2:
@@ -18,10 +18,10 @@ spring:
             validation-query: SELECT 1
 
     rabbitmq:
-        host: ${RABBIT_HOST}
+        host: 133.186.241.167
         port: 5672
-        username: ${RABBIT_USERNAME}
-        password: ${RABBIT_PASSWORD}
+        username: admin
+        password: nhnacademy123!
 
 
 eureka:

@@ -1,9 +1,38 @@
+spring:
+    config:
+        activate:
+            on-profile: prod
+
+    datasource:
+        url: ${MYSQL_URL}
+        username: ${MYSQL_USERNAME}
+        password: ${MYSQL_PASSWORD}
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        type: org.apache.commons.dbcp2.BasicDataSource
+        dbcp2:
+            initial-size: 5
+            max-total: 20
+            max-idle: 20
+            min-idle: 5
+            test-on-borrow: true
+            validation-query: SELECT 1
+
+    rabbitmq:
+        host: ${RABBIT_HOST}
+        port: 5672
+        username: ${RABBIT_USERNAME}
+        password: ${RABBIT_PASSWORD}
+
+
 eureka:
     client:
         fetch-registry: true
         service-url:
             defaultZone:
-                http://admin:1234@eureka:8761/eureka,http://admin:1234@eureka:8762/eureka
+                http://admin:1234@eureka:8761/eureka
     instance:
         pref₩er-ip-address: true
 
+feign:
+    bookstore:
+        url: bookstore:8081

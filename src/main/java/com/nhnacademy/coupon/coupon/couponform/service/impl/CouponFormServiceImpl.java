@@ -2,6 +2,8 @@ package com.nhnacademy.coupon.coupon.couponform.service.impl;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.nhnacademy.coupon.coupon.bookcouponusage.service.BookCouponUsageService;
+import com.nhnacademy.coupon.coupon.categorycouponusage.service.CategoryCouponUsageService;
 import com.nhnacademy.coupon.coupon.couponform.dto.request.CreateCouponFormRequest;
 import com.nhnacademy.coupon.coupon.couponform.dto.ReadCouponFormResponse;
 import com.nhnacademy.coupon.coupon.couponform.exception.CouponFormNotExistException;
@@ -11,6 +13,8 @@ import com.nhnacademy.coupon.coupon.coupontype.exception.CouponTypeDoesNotExistE
 import com.nhnacademy.coupon.coupon.coupontype.repository.CouponTypeRepository;
 import com.nhnacademy.coupon.coupon.couponusage.exception.CouponUsageDoesNotExistException;
 import com.nhnacademy.coupon.coupon.couponusage.repository.CouponUsageRespository;
+import com.nhnacademy.coupon.coupon.fixedcoupon.service.FixedCouponService;
+import com.nhnacademy.coupon.coupon.ratiocoupon.service.RatioCouponService;
 import com.nhnacademy.coupon.entity.couponform.CouponForm;
 import com.nhnacademy.coupon.entity.coupontype.CouponType;
 import com.nhnacademy.coupon.entity.couponusage.CouponUsage;
@@ -21,6 +25,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -36,6 +41,11 @@ public class CouponFormServiceImpl implements CouponFormService {
     private final CouponUsageRespository couponUsageRespository;
     private final CouponTypeRepository couponTypeRepository;
     private final CouponFormRepository couponFormRepository;
+    private final BookCouponUsageService bookCouponUsageService;
+    private final CategoryCouponUsageService categoryCouponUsageService;
+    private final FixedCouponService fixedCouponService;
+    private final RatioCouponService ratioCouponService;
+
     private final RabbitTemplate rabbitTemplate;
     private final ObjectMapper objectMapper;
     private static final String queueName2 = "3RUNNER-COUPON-EXPIRED-IN-THREE-DAY";
@@ -88,6 +98,7 @@ public class CouponFormServiceImpl implements CouponFormService {
     @Override
     public List<ReadCouponFormResponse> readAll(List<Long> couponFormIds) {
         List<CouponForm> couponForms = couponFormRepository.findAllByIdIn(couponFormIds);
+
         return couponForms.stream()
                 .map(couponForm -> ReadCouponFormResponse.builder()
                         .couponFormId(couponForm.getId())
@@ -100,6 +111,13 @@ public class CouponFormServiceImpl implements CouponFormService {
                         .minPrice(couponForm.getMinPrice())
                         .couponTypeId(couponForm.getCouponType().getId())
                         .couponUsageId(couponForm.getCouponUsage().getId())
+                        .usage(couponForm.getCouponUsage().getUsage())
+                        .type(couponForm.getCouponType().getType())
+                        .books(bookCouponUsageService.readBooks(couponForm.getCouponUsage().getId()))
+                        .categorys(categoryCouponUsageService.readCategorys(couponForm.getCouponUsage().getId()))
+                        .discountPrice(fixedCouponService.read(couponForm.getCouponType().getId()).discountPrice())
+                        .discountRate(ratioCouponService.read(couponForm.getCouponType().getId()).discountRate())
+                        .discountMax(ratioCouponService.read(couponForm.getCouponType().getId()).discountMaxPrice())
                         .build())
                 .toList();
     }

@@ -3,6 +3,9 @@ package com.nhnacademy.coupon.coupon.bookcouponusage.service.impl;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nhnacademy.coupon.coupon.bookcoupon.repository.BookCouponRepository;
+import com.nhnacademy.coupon.coupon.bookcouponusage.feign.BookControllerClient;
+import com.nhnacademy.coupon.coupon.bookcouponusage.feign.dto.BookForCouponResponse;
+import com.nhnacademy.coupon.coupon.bookcouponusage.feign.dto.UserReadBookResponse;
 import com.nhnacademy.coupon.coupon.bookcouponusage.repository.BookCouponUsageRepository;
 import com.nhnacademy.coupon.coupon.bookcouponusage.service.BookCouponUsageService;
 import com.nhnacademy.coupon.coupon.couponusage.exception.CouponUsageDoesNotExistException;
@@ -30,6 +33,7 @@ public class BookCouponUsageServiceImpl implements BookCouponUsageService {
     private final CouponUsageRespository couponUsageRespository;
     private final BookCouponUsageRepository bookCouponUsageRepository;
     private final BookCouponRepository bookCouponRepository;
+    private final BookControllerClient bookControllerClient;
 
     /**
      * 북 쿠폰 사용처 생성.
@@ -39,9 +43,16 @@ public class BookCouponUsageServiceImpl implements BookCouponUsageService {
      */
     @Override
     public Long create(List<Long> bookIds) {
-        String usage = createJsonFromBookIds(bookIds);
+        StringBuilder usage = new StringBuilder("사용가능 도서 : ");
 
-        CouponUsage couponUsage = new CouponUsage(usage);
+
+        List<BookForCouponResponse> books = bookControllerClient.readAllBooksForCoupon(bookIds).getBody().getData();
+
+        for(BookForCouponResponse book : books){
+            usage.append(book.title()).append(",");
+        }
+
+        CouponUsage couponUsage = new CouponUsage(usage.toString());
         couponUsageRespository.save(couponUsage);
 
         for(Long l : bookIds){
@@ -71,19 +82,7 @@ public class BookCouponUsageServiceImpl implements BookCouponUsageService {
      */
     @Override
     public List<Long> readBooks(Long couponUsageId) {
-        CouponUsage couponUsage = couponUsageRespository
-                .findById(couponUsageId)
-                .orElseThrow(
-                        () ->new CouponUsageDoesNotExistException(couponUsageId+"가 존재하지 않습니다.")
-                );
-        return bookCouponUsageRepository.findIdByCouponUsage(couponUsage);
-    }
 
-    private String createJsonFromBookIds(List<Long> categoryIds) {
-        try {
-            return objectMapper.writeValueAsString(categoryIds);
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException("Error converting category IDs to JSON", e);
-        }
+        return bookCouponUsageRepository.findBookIdsByCouponUsageId(couponUsageId);
     }
 }

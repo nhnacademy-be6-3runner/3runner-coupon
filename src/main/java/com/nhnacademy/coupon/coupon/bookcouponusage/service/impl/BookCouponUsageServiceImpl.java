@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nhnacademy.coupon.coupon.bookcoupon.repository.BookCouponRepository;
 import com.nhnacademy.coupon.coupon.bookcouponusage.feign.BookControllerClient;
+import com.nhnacademy.coupon.coupon.bookcouponusage.feign.dto.BookForCouponResponse;
 import com.nhnacademy.coupon.coupon.bookcouponusage.feign.dto.UserReadBookResponse;
 import com.nhnacademy.coupon.coupon.bookcouponusage.repository.BookCouponUsageRepository;
 import com.nhnacademy.coupon.coupon.bookcouponusage.service.BookCouponUsageService;
@@ -43,9 +44,12 @@ public class BookCouponUsageServiceImpl implements BookCouponUsageService {
     @Override
     public Long create(List<Long> bookIds) {
         StringBuilder usage = new StringBuilder("사용가능 도서 : ");
-        for (Long bookId : bookIds){
-            UserReadBookResponse response = bookControllerClient.readBook(bookId).getBody().getData();
-            usage.append(response.title()).append(",");
+
+
+        List<BookForCouponResponse> books = bookControllerClient.readAllBooksForCoupon(bookIds).getBody().getData();
+
+        for(BookForCouponResponse book : books){
+            usage.append(book.title()).append(",");
         }
 
         CouponUsage couponUsage = new CouponUsage(usage.toString());
@@ -78,11 +82,7 @@ public class BookCouponUsageServiceImpl implements BookCouponUsageService {
      */
     @Override
     public List<Long> readBooks(Long couponUsageId) {
-        CouponUsage couponUsage = couponUsageRespository
-                .findById(couponUsageId)
-                .orElseThrow(
-                        () ->new CouponUsageDoesNotExistException(couponUsageId+"가 존재하지 않습니다.")
-                );
-        return bookCouponUsageRepository.findIdByCouponUsage(couponUsage);
+
+        return bookCouponUsageRepository.findBookIdsByCouponUsageId(couponUsageId);
     }
 }

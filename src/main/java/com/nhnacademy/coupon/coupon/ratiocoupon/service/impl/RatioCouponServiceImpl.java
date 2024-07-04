@@ -14,6 +14,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 /**
  * 비율 쿠폰 서비스 구현체
  *
@@ -36,7 +38,7 @@ public class RatioCouponServiceImpl implements RatioCouponService {
      */
     @Override
     public Long create(double discountRate, int discountMaxPrice) {
-        String type = "할인율 :" +discountRate + ", 최대할인금액 : " + discountMaxPrice;
+        String type = "ratio";
 
         CouponType couponType = new CouponType(type);
         couponTypeRepository.save(couponType);
@@ -59,12 +61,10 @@ public class RatioCouponServiceImpl implements RatioCouponService {
                 .findById(couponTypeId)
                 .orElseThrow(()-> new CouponTypeDoesNotExistException(couponTypeId+"가 없습니다"));
 
-        RatioCoupon ratioCoupon = ratioCouponRepository
-                .findByCouponType(couponType)
-                .orElseThrow(
-                        ()->new FixedCouponDoesNotExistException(couponType.getType()+"가 없습니다")
-                );
+        Optional<RatioCoupon> ratioCouponOptional = ratioCouponRepository
+                .findByCouponType(couponType);
 
+        RatioCoupon ratioCoupon = ratioCouponOptional.orElseGet(() -> new RatioCoupon(couponType, 0, 0));
 
         return ReadRatioCouponResponse.builder()
                 .ratioCouponId(ratioCoupon.getId())

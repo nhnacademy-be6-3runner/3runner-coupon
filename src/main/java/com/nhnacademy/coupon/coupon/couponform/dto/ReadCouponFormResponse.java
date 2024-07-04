@@ -5,6 +5,7 @@ import com.nhnacademy.coupon.entity.couponusage.CouponUsage;
 import lombok.Builder;
 
 import java.time.ZonedDateTime;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -32,5 +33,11 @@ public record ReadCouponFormResponse(
         Long couponTypeId,
         Long couponUsageId,
         String type,
-        String usage) {
+        String usage,
+        List<Long> books,
+        List<Long> categorys,
+        Integer discountPrice,
+        Double discountRate,
+        Integer discountMax
+        ) {
 }

@@ -16,4 +16,4 @@ eureka:
 
 feign:
     bookstore:
-        url: bookstore:8081
+        url: gateway:8080

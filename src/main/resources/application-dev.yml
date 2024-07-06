@@ -18,4 +18,4 @@ eureka:
 
 feign:
     bookstore:
-        url: localhost:8081
+        url: localhost:8080

@@ -41,7 +41,7 @@ public class CouponFormController {
     }
 
     @GetMapping("/forms")
-    public ApiResponse<List<ReadCouponFormResponse>> createCouponForm() {
+    public ApiResponse<List<ReadCouponFormResponse>> readAllCouponForms() {
         return ApiResponse.createSuccess(couponFormService.readAllForms());
     }
 }

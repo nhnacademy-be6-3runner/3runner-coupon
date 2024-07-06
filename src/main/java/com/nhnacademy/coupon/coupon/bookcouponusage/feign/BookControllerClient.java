@@ -15,5 +15,5 @@ public interface BookControllerClient {
     @GetMapping("/bookstore/books/{bookId}")
     ApiResponse<UserReadBookResponse> readBook(@PathVariable("bookId") Long bookId);
     @GetMapping("bookstore/books/list")
-    ApiResponse<List<BookForCouponResponse>> readAllBooksForCoupon(@RequestParam List<Long> bookIds);
+    ApiResponse<List<BookForCouponResponse>> readAllBooksForCoupon(@RequestParam List<Long> ids);
 }

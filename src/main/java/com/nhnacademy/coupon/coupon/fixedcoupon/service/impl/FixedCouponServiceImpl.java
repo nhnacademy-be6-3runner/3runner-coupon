@@ -38,7 +38,7 @@ public class FixedCouponServiceImpl implements FixedCouponService {
      */
     @Override
     public Long create(int discountPrice) {
-        String type = "fix";
+        String type = "고정할인 : "+discountPrice;
         CouponType couponType = new CouponType(type);
         couponTypeRepository.save(couponType);
 

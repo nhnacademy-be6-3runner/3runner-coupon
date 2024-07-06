@@ -24,7 +24,7 @@ POST http://localhost:8083/coupon/usages/categories
 Content-Type: application/json
 
 {
-  "categoryIds": [1, 2]
+  "categoryIds": [1, 2, 3, 4]
 }
 
 ###

@@ -16,5 +16,5 @@ public interface CategoryControllerClient {
     ApiResponse<CategoryResponse> readCategory(@PathVariable Long categoryId);
 
     @GetMapping("bookstore/categories/list")
-    ApiResponse<List<CategoryForCouponResponse>> readAllCategoriesList(@RequestParam List<Long> categoryIds);
+    ApiResponse<List<CategoryForCouponResponse>> readAllCategoriesList(@RequestParam List<Long> ids);
 }

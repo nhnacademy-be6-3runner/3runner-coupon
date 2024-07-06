@@ -38,7 +38,7 @@ public class RatioCouponServiceImpl implements RatioCouponService {
      */
     @Override
     public Long create(double discountRate, int discountMaxPrice) {
-        String type = "ratio";
+        String type = "할인율 : " + discountRate + ", 최대할인가 : " + discountMaxPrice;
 
         CouponType couponType = new CouponType(type);
         couponTypeRepository.save(couponType);

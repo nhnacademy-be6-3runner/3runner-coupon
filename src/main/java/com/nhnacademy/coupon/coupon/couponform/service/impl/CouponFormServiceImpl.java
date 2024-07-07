@@ -147,6 +147,33 @@ public class CouponFormServiceImpl implements CouponFormService {
                 .toList();
     }
 
+    @Override
+    public ReadCouponFormResponse readForm(Long couponFormId) {
+        CouponForm couponForm = couponFormRepository
+                .findById(couponFormId)
+                .orElseThrow(()-> new CouponFormNotExistException("쿠폰 폼아이디 : "+couponFormId+"가 없습니다"));
+
+        return ReadCouponFormResponse.builder()
+                .couponFormId(couponForm.getId())
+                .startDate(couponForm.getStartDate())
+                .endDate(couponForm.getEndDate())
+                .createdAt(couponForm.getCreatedAt())
+                .name(couponForm.getName())
+                .code(couponForm.getCode())
+                .maxPrice(couponForm.getMaxPrice())
+                .minPrice(couponForm.getMinPrice())
+                .couponTypeId(couponForm.getCouponType().getId())
+                .couponUsageId(couponForm.getCouponUsage().getId())
+                .usage(couponForm.getCouponUsage().getUsage())
+                .type(couponForm.getCouponType().getType())
+                .books(bookCouponUsageService.readBooks(couponForm.getCouponUsage().getId()))
+                .categorys(categoryCouponUsageService.readCategorys(couponForm.getCouponUsage().getId()))
+                .discountPrice(fixedCouponService.read(couponForm.getCouponType().getId()).discountPrice())
+                .discountRate(ratioCouponService.read(couponForm.getCouponType().getId()).discountRate())
+                .discountMax(ratioCouponService.read(couponForm.getCouponType().getId()).discountMaxPrice())
+                .build();
+    }
+
     /**
      * 쿠폰폼 스케쥴러 오후한시에 만료가 3일 남은 쿠폰 메시지 보내는 메소드.
      *

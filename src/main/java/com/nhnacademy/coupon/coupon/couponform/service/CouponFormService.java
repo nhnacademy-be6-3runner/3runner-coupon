@@ -18,4 +18,5 @@ public interface CouponFormService {
     List<ReadCouponFormResponse> readAll(List<Long> couponFormIds);
     void sendNoticeCouponsExpiringThreeDaysLater() throws JsonProcessingException;
     List<ReadCouponFormResponse> readAllForms();
+    ReadCouponFormResponse readForm(Long couponFormId);
 }

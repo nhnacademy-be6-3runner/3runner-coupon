@@ -26,6 +26,7 @@ public class CouponForm {
     private ZonedDateTime createdAt;
 
     private String name;
+
     private UUID code;
     private Integer maxPrice;
     private Integer minPrice;

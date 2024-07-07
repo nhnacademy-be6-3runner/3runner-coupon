@@ -44,11 +44,4 @@ public class CouponFormController {
     public ApiResponse<List<ReadCouponFormResponse>> readAllCouponForms() {
         return ApiResponse.success(couponFormService.readAllForms());
     }
-
-
-
-    @GetMapping("/forms/{couponFormId}")
-    public ApiResponse<ReadCouponFormResponse> readCouponForms(@PathVariable Long couponFormId) {
-        return ApiResponse.success(couponFormService.readForm(couponFormId));
-    }
 }

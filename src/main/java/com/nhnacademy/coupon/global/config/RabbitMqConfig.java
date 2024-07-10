@@ -37,7 +37,6 @@ public class RabbitMqConfig {
     private String rabbitmqPassword;
 
     private static final String queueName1 = "3RUNNER-COUPON-ISSUED";
-    private static final String queueName3 = "3RUNNER-COUPON-ISSUED-REPLY";
     private static final String queueName2 = "3RUNNER-COUPON-EXPIRED-IN-THREE-DAY";
     private static final String exchangeName ="3RUNNER-EXCHANGE-NAME";
     private static final String routingKey1="3RUNNER-ROUTING-KEY";

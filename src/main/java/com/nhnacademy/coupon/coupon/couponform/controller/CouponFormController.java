@@ -40,8 +40,14 @@ public class CouponFormController {
         return ApiResponse.createSuccess(couponFormService.create(createCouponFormRequest));
     }
 
+    @PostMapping("/forms/{quantity}")
+    public ApiResponse<Void> createCouponFormWithMq(@RequestBody CreateCouponFormRequest createCouponFormRequest, @PathVariable Long quantity) throws JsonProcessingException {
+        couponFormService.createWithMq(createCouponFormRequest, quantity);
+        return ApiResponse.createSuccess(null);
+    }
+
     @GetMapping("/forms")
     public ApiResponse<List<ReadCouponFormResponse>> readAllCouponForms() {
-        return ApiResponse.createSuccess(couponFormService.readAllForms());
+        return ApiResponse.success(couponFormService.readAllForms());
     }
 }

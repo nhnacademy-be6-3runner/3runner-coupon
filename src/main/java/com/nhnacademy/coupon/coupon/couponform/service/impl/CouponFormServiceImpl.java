@@ -50,13 +50,8 @@ public class CouponFormServiceImpl implements CouponFormService {
     private final RabbitTemplate rabbitTemplate;
     private final ObjectMapper objectMapper;
     private static final String queueName2 = "3RUNNER-COUPON-EXPIRED-IN-THREE-DAY";
+    private static final String queueName1 = "3RUNNER-COUPON-ISSUED";
 
-    /**
-     * 쿠폰폼생성.
-     *
-     * @param createCouponFormRequest Dto 폼
-     * @return 쿠폰폼 아이디
-     */
     @Override
     public Long create(CreateCouponFormRequest createCouponFormRequest) {
         CouponUsage couponUsage = couponUsageRespository
@@ -85,12 +80,6 @@ public class CouponFormServiceImpl implements CouponFormService {
         return couponForm.getId();
     }
 
-    /**
-     * 쿠폰폼 읽기
-     *
-     * @param couponFormId 쿠폰폼아이디
-     * @return 쿠폰폼
-     */
     @Override
     public CouponForm read(Long couponFormId) {
         return couponFormRepository.findById(couponFormId).orElseThrow(()->new CouponFormNotExistException(""));
@@ -148,10 +137,6 @@ public class CouponFormServiceImpl implements CouponFormService {
                 .toList();
     }
 
-    /**
-     * 쿠폰폼 스케쥴러 오후한시에 만료가 3일 남은 쿠폰 메시지 보내는 메소드.
-     *
-     */
     @Override
     @Async
     @Scheduled(cron = "0 0 13 * * ?")
@@ -163,5 +148,12 @@ public class CouponFormServiceImpl implements CouponFormService {
                 .build())
                 .toList();
         rabbitTemplate.convertAndSend(queueName2, objectMapper.writeValueAsString(data));
+    }
+
+    @Override
+    public void createWithMq(CreateCouponFormRequest readCouponFormRequest, Long quantity) throws JsonProcessingException {
+        for(int i = 0 ; i < quantity ; i++) {
+            rabbitTemplate.convertAndSend(queueName1, objectMapper.writeValueAsString(readCouponFormRequest));
+        }
     }
 }

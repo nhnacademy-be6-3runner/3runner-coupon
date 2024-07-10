@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nhnacademy.coupon.coupon.bookcouponusage.service.BookCouponUsageService;
 import com.nhnacademy.coupon.coupon.categorycouponusage.service.CategoryCouponUsageService;
+import com.nhnacademy.coupon.coupon.couponform.dto.CouponFormDto;
 import com.nhnacademy.coupon.coupon.couponform.dto.request.CreateCouponFormRequest;
 import com.nhnacademy.coupon.coupon.couponform.dto.ReadCouponFormResponse;
 import com.nhnacademy.coupon.coupon.couponform.exception.CouponFormNotExistException;
@@ -156,6 +157,11 @@ public class CouponFormServiceImpl implements CouponFormService {
     @Scheduled(cron = "0 0 13 * * ?")
     public void sendNoticeCouponsExpiringThreeDaysLater() throws JsonProcessingException {
         List<CouponForm> couponsExpiringThreeDaysLater = couponFormRepository.findCouponsExpiringThreeDaysLater();
-        rabbitTemplate.convertAndSend(queueName2, objectMapper.writeValueAsString(couponsExpiringThreeDaysLater));
+        List<CouponFormDto> data = couponsExpiringThreeDaysLater.stream().map(o-> CouponFormDto.builder()
+                .id(o.getId())
+                .name(o.getName())
+                .build())
+                .toList();
+        rabbitTemplate.convertAndSend(queueName2, objectMapper.writeValueAsString(data));
     }
 }

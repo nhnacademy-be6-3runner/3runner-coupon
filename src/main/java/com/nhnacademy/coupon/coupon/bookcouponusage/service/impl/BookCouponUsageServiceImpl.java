@@ -35,12 +35,6 @@ public class BookCouponUsageServiceImpl implements BookCouponUsageService {
     private final BookCouponRepository bookCouponRepository;
     private final BookControllerClient bookControllerClient;
 
-    /**
-     * 북 쿠폰 사용처 생성.
-     *
-     * @param bookIds 북아이디 리스트
-     * @return 쿠폰사용처아이디
-     */
     @Override
     public Long create(List<Long> bookIds) {
         StringBuilder usage = new StringBuilder("사용가능 도서 : ");
@@ -74,12 +68,6 @@ public class BookCouponUsageServiceImpl implements BookCouponUsageService {
         return couponUsage.getId();
     }
 
-    /**
-     * 북 쿠폰 사용가능한 북 리스트 반환 메소드.
-     *
-     * @param couponUsageId 쿠폰 사용처 아이디
-     * @return 사용처 사용가능한 북 아이디 리스트
-     */
     @Override
     public List<Long> readBooks(Long couponUsageId) {
 

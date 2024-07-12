@@ -1,10 +1,7 @@
 package com.nhnacademy.coupon.coupon.ratiocoupon.service.impl;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nhnacademy.coupon.coupon.coupontype.exception.CouponTypeDoesNotExistException;
 import com.nhnacademy.coupon.coupon.coupontype.repository.CouponTypeRepository;
-import com.nhnacademy.coupon.coupon.fixedcoupon.exception.FixedCouponDoesNotExistException;
 import com.nhnacademy.coupon.coupon.ratiocoupon.dto.response.ReadRatioCouponResponse;
 import com.nhnacademy.coupon.coupon.ratiocoupon.repository.RatioCouponRepository;
 import com.nhnacademy.coupon.coupon.ratiocoupon.service.RatioCouponService;
@@ -25,17 +22,9 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Transactional
 public class RatioCouponServiceImpl implements RatioCouponService {
-    private final ObjectMapper objectMapper;
     private final RatioCouponRepository ratioCouponRepository;
     private final CouponTypeRepository couponTypeRepository;
 
-    /**
-     * 비율 쿠폰 생성.
-     *
-     * @param discountRate 할인비율
-     * @param discountMaxPrice 최대할인가격
-     * @return 쿠폰타입 아이디
-     */
     @Override
     public Long create(double discountRate, int discountMaxPrice) {
         String type = "할인율 : " + discountRate + ", 최대할인가 : " + discountMaxPrice;
@@ -49,12 +38,6 @@ public class RatioCouponServiceImpl implements RatioCouponService {
         return couponType.getId();
     }
 
-    /**
-     * 비율 쿠폰 읽기.
-     *
-     * @param couponTypeId 쿠폰타입아이디
-     * @return 반환Dto
-     */
     @Override
     public ReadRatioCouponResponse read(Long couponTypeId) {
         CouponType couponType = couponTypeRepository

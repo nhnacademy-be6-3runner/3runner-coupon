@@ -20,6 +20,7 @@ import com.nhnacademy.coupon.entity.couponform.CouponForm;
 import com.nhnacademy.coupon.entity.coupontype.CouponType;
 import com.nhnacademy.coupon.entity.couponusage.CouponUsage;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -35,6 +36,7 @@ import java.util.UUID;
  *
  * @author 김병우
  */
+@Slf4j
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -147,6 +149,10 @@ public class CouponFormServiceImpl implements CouponFormService {
                 .name(o.getName())
                 .build())
                 .toList();
+        for (CouponForm couponForm : couponsExpiringThreeDaysLater){
+            log.info(couponForm.getName());
+            log.info(String.valueOf(couponForm.getId()));
+        }
         rabbitTemplate.convertAndSend(queueName2, objectMapper.writeValueAsString(data));
     }
 

@@ -22,11 +22,6 @@ import java.util.List;
 public class CouponTypeServiceImpl implements CouponTypeService {
     private final CouponTypeRepository couponTypeRepository;
 
-    /**
-     * 전체 쿠폰타입 반환
-     *
-     * @return 반환Dto
-     */
     @Override
     public List<ReadCouponTypeResponse> readAll() {
         return couponTypeRepository.findAll().stream()

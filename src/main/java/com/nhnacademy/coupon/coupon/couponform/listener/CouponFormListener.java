@@ -9,6 +9,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
+/**
+ * 쿠폰 메시지 큐 리스너.
+ *
+ * @author 김병우
+ */
 @Slf4j
 @Component
 @RequiredArgsConstructor

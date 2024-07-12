@@ -30,12 +30,6 @@ public class FixedCouponServiceImpl implements FixedCouponService {
     private final FixedCouponRepository fixedCouponRepository;
     private final CouponTypeRepository couponTypeRepository;
 
-    /**
-     * 고정쿠폰 정책 생성.
-     *
-     * @param discountPrice 할인금액
-     * @return 쿠폰타입 아이디
-     */
     @Override
     public Long create(int discountPrice) {
         String type = "고정할인 : "+discountPrice;
@@ -48,12 +42,6 @@ public class FixedCouponServiceImpl implements FixedCouponService {
         return couponType.getId();
     }
 
-    /**
-     * 고정쿠폰 정책 읽기.
-     *
-     * @param couponTypeId 쿠폰타입 아이디
-     * @return 고정쿠폰Dto
-     */
     @Override
     public ReadFixedCouponResponse read(Long couponTypeId) {
         CouponType couponType = couponTypeRepository

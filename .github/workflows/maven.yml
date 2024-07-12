@@ -57,9 +57,8 @@ jobs:
           script: |
             cd /home/nhnacademy/coupon
             sudo docker build -t coupon-image .
-          
-            if sudo docker service ls | grep -q 'coupon'; then
-            sudo docker service rm coupon
-            fi
-            sudo docker service create --name coupon --publish 8083:8083 --network back_network_swarm coupon-image
+            sudo docker stop coupon || true
+            sudo docker rm coupon || true
+            sudo docker build -t coupon-image .
+            sudo docker run -d -p 8083:8083 --name coupon --net back_network coupon-image
             

@@ -18,11 +18,11 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class CouponFormListener {
-    private static final String queueName1 = "3RUNNER-COUPON-ISSUED";
+    private static final String QUEUE_NAME_1 = "3RUNNER-COUPON-ISSUED";
     private final CouponFormService couponFormService;
     private final ObjectMapper objectMapper;
 
-    @RabbitListener(queues = queueName1)
+    @RabbitListener(queues = QUEUE_NAME_1)
     public void receiveMessage(String createCouponFormRequestJson) throws JsonProcessingException {
         log.info("{}",createCouponFormRequestJson);
         couponFormService.create(objectMapper.readValue(createCouponFormRequestJson, CreateCouponFormRequest.class));

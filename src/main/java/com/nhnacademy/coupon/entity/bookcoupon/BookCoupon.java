@@ -2,7 +2,6 @@ package com.nhnacademy.coupon.entity.bookcoupon;
 
 
 import com.nhnacademy.coupon.entity.bookcouponusage.BookCouponUsage;
-import com.nhnacademy.coupon.entity.couponform.CouponForm;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

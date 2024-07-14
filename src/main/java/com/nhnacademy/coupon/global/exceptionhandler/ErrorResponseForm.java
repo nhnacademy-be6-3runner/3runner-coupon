@@ -1,4 +1,4 @@
-package com.nhnacademy.coupon.global.exceptionHandler;
+package com.nhnacademy.coupon.global.exceptionhandler;
 
 import lombok.Builder;
 

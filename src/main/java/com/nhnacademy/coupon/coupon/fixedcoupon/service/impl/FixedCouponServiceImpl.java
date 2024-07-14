@@ -1,16 +1,13 @@
 package com.nhnacademy.coupon.coupon.fixedcoupon.service.impl;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nhnacademy.coupon.coupon.coupontype.exception.CouponTypeDoesNotExistException;
 import com.nhnacademy.coupon.coupon.coupontype.repository.CouponTypeRepository;
 import com.nhnacademy.coupon.coupon.fixedcoupon.dto.response.ReadFixedCouponResponse;
-import com.nhnacademy.coupon.coupon.fixedcoupon.exception.FixedCouponDoesNotExistException;
 import com.nhnacademy.coupon.coupon.fixedcoupon.repository.FixedCouponRepository;
 import com.nhnacademy.coupon.coupon.fixedcoupon.service.FixedCouponService;
 import com.nhnacademy.coupon.entity.coupontype.CouponType;
 import com.nhnacademy.coupon.entity.fixedcoupon.FixedCoupon;
-import com.nhnacademy.coupon.entity.ratiocoupon.RatioCoupon;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

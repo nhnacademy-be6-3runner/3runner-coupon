@@ -2,8 +2,6 @@ package com.nhnacademy.coupon.coupon.couponform.dto;
 
 import lombok.Builder;
 
-import java.time.ZonedDateTime;
-import java.util.UUID;
 
 /**
  * 쿠폰폼Dto.

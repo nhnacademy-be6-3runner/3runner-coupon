@@ -51,12 +51,4 @@ public interface CouponFormService {
      */
     List<ReadCouponFormResponse> readAllForms();
 
-    /**
-     * 쿠폰폼 MQ 생성.
-     *
-     * @param readCouponFormRequest 생성Dto.
-     * @param quantity 수량
-     * @throws JsonProcessingException Json 변환 에러
-     */
-    void createWithMq(CreateCouponFormRequest readCouponFormRequest, Long quantity) throws JsonProcessingException;
 }

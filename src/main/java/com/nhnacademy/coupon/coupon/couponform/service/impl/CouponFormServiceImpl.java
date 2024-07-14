@@ -156,10 +156,4 @@ public class CouponFormServiceImpl implements CouponFormService {
         rabbitTemplate.convertAndSend(queueName2, objectMapper.writeValueAsString(data));
     }
 
-    @Override
-    public void createWithMq(CreateCouponFormRequest readCouponFormRequest, Long quantity) throws JsonProcessingException {
-        for(int i = 0 ; i < quantity ; i++) {
-            rabbitTemplate.convertAndSend(queueName1, objectMapper.writeValueAsString(readCouponFormRequest));
-        }
-    }
 }

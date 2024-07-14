@@ -1,8 +1,6 @@
 package com.nhnacademy.coupon.entity.coupontype;
 
 import com.nhnacademy.coupon.entity.couponform.CouponForm;
-import com.nhnacademy.coupon.entity.fixedcoupon.FixedCoupon;
-import com.nhnacademy.coupon.entity.ratiocoupon.RatioCoupon;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

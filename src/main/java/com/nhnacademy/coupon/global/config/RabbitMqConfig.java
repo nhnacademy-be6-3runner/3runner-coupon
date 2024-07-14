@@ -1,6 +1,5 @@
 package com.nhnacademy.coupon.global.config;
 
-import com.nhnacademy.coupon.coupon.couponform.listener.CouponFormListener;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.Queue;
@@ -10,8 +9,6 @@ import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFacto
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
-import org.springframework.amqp.rabbit.listener.adapter.MessageListenerAdapter;
 import org.springframework.amqp.rabbit.retry.RejectAndDontRequeueRecoverer;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;
@@ -36,11 +33,11 @@ public class RabbitMqConfig {
     @Value("${spring.rabbitmq.password}")
     private String rabbitmqPassword;
 
-    private static final String queueName1 = "3RUNNER-COUPON-ISSUED";
-    private static final String queueName2 = "3RUNNER-COUPON-EXPIRED-IN-THREE-DAY";
-    private static final String exchangeName ="3RUNNER-EXCHANGE-NAME";
-    private static final String routingKey1="3RUNNER-ROUTING-KEY";
-    private static final String routingKey2 = "3RUNNER-ROUTING-KEY2";
+    private static final String QUEUE_NAME_1 = "3RUNNER-COUPON-ISSUED";
+    private static final String QUEUE_NAME_2 = "3RUNNER-COUPON-EXPIRED-IN-THREE-DAY";
+    private static final String EXCHANGE_NAME ="3RUNNER-EXCHANGE-NAME";
+    private static final String ROUTING_KEY_1 ="3RUNNER-ROUTING-KEY";
+    private static final String ROUTING_KEY_2 = "3RUNNER-ROUTING-KEY2";
     private static final int MAX_ATTEMPTS = 3;
     private static final long INITIAL_INTERVAL = 3L;
     private static final long MULTIPLIER = 2L;
@@ -48,27 +45,27 @@ public class RabbitMqConfig {
 
     @Bean
     public TopicExchange couponExchange() {
-        return new TopicExchange(exchangeName);
+        return new TopicExchange(EXCHANGE_NAME);
     }
 
     @Bean
     public Queue expiredCouponQueue() {
-        return new Queue(queueName1, false);
+        return new Queue(QUEUE_NAME_1, false);
     }
 
     @Bean
     public Queue expiredThreeDayCouponQueue() {
-        return new Queue(queueName2, false);
+        return new Queue(QUEUE_NAME_2, false);
     }
 
     @Bean
     public Binding bindingExpiredCouponQueue() {
-        return BindingBuilder.bind(expiredCouponQueue()).to(couponExchange()).with(routingKey1);
+        return BindingBuilder.bind(expiredCouponQueue()).to(couponExchange()).with(ROUTING_KEY_1);
     }
 
     @Bean
     public Binding bindingExpiredThreeDayCouponQueue() {
-        return BindingBuilder.bind(expiredThreeDayCouponQueue()).to(couponExchange()).with(routingKey2);
+        return BindingBuilder.bind(expiredThreeDayCouponQueue()).to(couponExchange()).with(ROUTING_KEY_2);
     }
 
     @Bean

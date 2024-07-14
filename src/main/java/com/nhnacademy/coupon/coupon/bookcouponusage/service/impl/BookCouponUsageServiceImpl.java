@@ -1,14 +1,11 @@
 package com.nhnacademy.coupon.coupon.bookcouponusage.service.impl;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nhnacademy.coupon.coupon.bookcoupon.repository.BookCouponRepository;
 import com.nhnacademy.coupon.coupon.bookcouponusage.feign.BookControllerClient;
 import com.nhnacademy.coupon.coupon.bookcouponusage.feign.dto.BookForCouponResponse;
-import com.nhnacademy.coupon.coupon.bookcouponusage.feign.dto.UserReadBookResponse;
 import com.nhnacademy.coupon.coupon.bookcouponusage.repository.BookCouponUsageRepository;
 import com.nhnacademy.coupon.coupon.bookcouponusage.service.BookCouponUsageService;
-import com.nhnacademy.coupon.coupon.couponusage.exception.CouponUsageDoesNotExistException;
 import com.nhnacademy.coupon.coupon.couponusage.repository.CouponUsageRespository;
 import com.nhnacademy.coupon.entity.bookcoupon.BookCoupon;
 import com.nhnacademy.coupon.entity.bookcouponusage.BookCouponUsage;
@@ -29,7 +26,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Service
 public class BookCouponUsageServiceImpl implements BookCouponUsageService {
-    private final ObjectMapper objectMapper;
     private final CouponUsageRespository couponUsageRespository;
     private final BookCouponUsageRepository bookCouponUsageRepository;
     private final BookCouponRepository bookCouponRepository;

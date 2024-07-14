@@ -43,13 +43,17 @@ public class CouponForm {
         this.createdAt = ZonedDateTime.now();
     }
 
-    public CouponForm(ZonedDateTime startDate, ZonedDateTime endDate, String name, UUID code, Integer maxPrice, Integer minPrice, CouponType couponType, CouponUsage couponUsage) {
+    public void setBasicDetails(ZonedDateTime startDate, ZonedDateTime endDate, String name, UUID code, Integer maxPrice, Integer minPrice) {
         this.startDate = startDate;
         this.endDate = endDate;
         this.name = name;
         this.code = code;
         this.maxPrice = maxPrice;
         this.minPrice = minPrice;
+    }
+
+    // 두 번째 set 함수
+    public void setCouponDetails(CouponType couponType, CouponUsage couponUsage) {
         this.couponType = couponType;
         this.couponUsage = couponUsage;
     }

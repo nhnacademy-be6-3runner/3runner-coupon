@@ -27,7 +27,6 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -51,8 +50,8 @@ public class CouponFormServiceImpl implements CouponFormService {
 
     private final RabbitTemplate rabbitTemplate;
     private final ObjectMapper objectMapper;
-    private static final String queueName2 = "3RUNNER-COUPON-EXPIRED-IN-THREE-DAY";
-    private static final String queueName1 = "3RUNNER-COUPON-ISSUED";
+    private static final String QUEUE_NAME_2 = "3RUNNER-COUPON-EXPIRED-IN-THREE-DAY";
+    private static final String QUEUE_NAME_1 = "3RUNNER-COUPON-ISSUED";
 
     @Override
     public Long create(CreateCouponFormRequest createCouponFormRequest) {
@@ -68,16 +67,20 @@ public class CouponFormServiceImpl implements CouponFormService {
                         ()-> new CouponTypeDoesNotExistException(createCouponFormRequest.couponTypeId()+"가 존재하지 않습니다.")
                 );
 
-        CouponForm couponForm = new CouponForm(
+        CouponForm couponForm = new CouponForm();
+        couponForm.setBasicDetails(
                 createCouponFormRequest.startDate(),
                 createCouponFormRequest.endDate(),
                 createCouponFormRequest.name(),
                 UUID.randomUUID(),
                 createCouponFormRequest.maxPrice(),
-                createCouponFormRequest.minPrice(),
+                createCouponFormRequest.minPrice()
+        );
+        couponForm.setCouponDetails(
                 couponType,
                 couponUsage
         );
+
         couponFormRepository.save(couponForm);
         return couponForm.getId();
     }
@@ -153,13 +156,7 @@ public class CouponFormServiceImpl implements CouponFormService {
             log.info(couponForm.getName());
             log.info(String.valueOf(couponForm.getId()));
         }
-        rabbitTemplate.convertAndSend(queueName2, objectMapper.writeValueAsString(data));
+        rabbitTemplate.convertAndSend(QUEUE_NAME_2, objectMapper.writeValueAsString(data));
     }
 
-    @Override
-    public void createWithMq(CreateCouponFormRequest readCouponFormRequest, Long quantity) throws JsonProcessingException {
-        for(int i = 0 ; i < quantity ; i++) {
-            rabbitTemplate.convertAndSend(queueName1, objectMapper.writeValueAsString(readCouponFormRequest));
-        }
-    }
 }

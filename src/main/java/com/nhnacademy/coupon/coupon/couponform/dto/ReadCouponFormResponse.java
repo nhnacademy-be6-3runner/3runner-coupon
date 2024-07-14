@@ -1,7 +1,5 @@
 package com.nhnacademy.coupon.coupon.couponform.dto;
 
-import com.nhnacademy.coupon.entity.coupontype.CouponType;
-import com.nhnacademy.coupon.entity.couponusage.CouponUsage;
 import lombok.Builder;
 
 import java.time.ZonedDateTime;

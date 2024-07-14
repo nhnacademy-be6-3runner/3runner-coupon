@@ -1,8 +1,6 @@
 package com.nhnacademy.coupon.coupon.fixedcoupon.service;
 
 import com.nhnacademy.coupon.coupon.fixedcoupon.dto.response.ReadFixedCouponResponse;
-import com.nhnacademy.coupon.entity.coupontype.CouponType;
-import com.nhnacademy.coupon.entity.fixedcoupon.FixedCoupon;
 
 /**
  * 고정 쿠폰 서비스 인터페이스.

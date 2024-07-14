@@ -5,7 +5,6 @@ import com.nhnacademy.coupon.coupon.coupontype.repository.CouponTypeRepository;
 import com.nhnacademy.coupon.coupon.coupontype.service.CouponTypeService;
 import com.nhnacademy.coupon.entity.coupontype.CouponType;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

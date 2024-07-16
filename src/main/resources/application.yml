@@ -47,3 +47,7 @@ logging:
     level:
         org.hibernate.orm.jdbc.bind: trace
         org.springframework.transaction.interceptor: trace
+springdoc:
+    swagger-ui:
+        url: /docs/openapi-3.0.json
+        path: /docs/swagger

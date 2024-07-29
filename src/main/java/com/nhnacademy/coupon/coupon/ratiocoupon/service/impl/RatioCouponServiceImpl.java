@@ -47,7 +47,8 @@ public class RatioCouponServiceImpl implements RatioCouponService {
         Optional<RatioCoupon> ratioCouponOptional = ratioCouponRepository
                 .findByCouponType(couponType);
 
-        RatioCoupon ratioCoupon = ratioCouponOptional.orElseGet(() -> new RatioCoupon(couponType, 0, 0));
+        RatioCoupon ratioCoupon = ratioCouponOptional
+                .orElseGet(() -> new RatioCoupon(couponType, 0, 0));
 
         return ReadRatioCouponResponse.builder()
                 .ratioCouponId(ratioCoupon.getId())

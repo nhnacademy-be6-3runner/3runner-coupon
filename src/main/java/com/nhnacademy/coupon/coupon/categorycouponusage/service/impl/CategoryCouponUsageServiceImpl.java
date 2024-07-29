@@ -43,7 +43,7 @@ public class CategoryCouponUsageServiceImpl implements CategoryCouponUsageServic
         CouponUsage couponUsage = new CouponUsage(usage.toString());
         couponUsageRespository.save(couponUsage);
 
-        for(Long l : categoryIds){
+        for (Long l : categoryIds) {
             Optional<CategoryCoupon> categoryCouponOptional = categoryCouponRepository.findById(l);
             CategoryCoupon categoryCoupon;
 

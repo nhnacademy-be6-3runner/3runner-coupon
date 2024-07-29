@@ -68,6 +68,7 @@ public class CouponFormServiceImpl implements CouponFormService {
                 );
 
         CouponForm couponForm = new CouponForm();
+
         couponForm.setBasicDetails(
                 createCouponFormRequest.startDate(),
                 createCouponFormRequest.endDate(),
@@ -76,6 +77,7 @@ public class CouponFormServiceImpl implements CouponFormService {
                 createCouponFormRequest.maxPrice(),
                 createCouponFormRequest.minPrice()
         );
+
         couponForm.setCouponDetails(
                 couponType,
                 couponUsage
@@ -147,15 +149,18 @@ public class CouponFormServiceImpl implements CouponFormService {
     @Scheduled(cron = "0 0 13 * * ?")
     public void sendNoticeCouponsExpiringThreeDaysLater() throws JsonProcessingException {
         List<CouponForm> couponsExpiringThreeDaysLater = couponFormRepository.findCouponsExpiringThreeDaysLater();
+
         List<CouponFormDto> data = couponsExpiringThreeDaysLater.stream().map(o-> CouponFormDto.builder()
                 .id(o.getId())
                 .name(o.getName())
                 .build())
                 .toList();
-        for (CouponForm couponForm : couponsExpiringThreeDaysLater){
+
+        for (CouponForm couponForm : couponsExpiringThreeDaysLater) {
             log.info(couponForm.getName());
             log.info(String.valueOf(couponForm.getId()));
         }
+
         rabbitTemplate.convertAndSend(QUEUE_NAME_2, objectMapper.writeValueAsString(data));
     }
 

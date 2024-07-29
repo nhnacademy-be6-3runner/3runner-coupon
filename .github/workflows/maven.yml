@@ -2,7 +2,9 @@ name: Java CI with Maven, SonarQube, and Docker
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main" , "develop"]
+  pull_request:
+    branches: [ "main" , "develop"]
 
 jobs:
   build:
@@ -53,3 +55,4 @@ jobs:
             sudo docker rm coupon || true
             sudo docker run -d -p 8083:8083 --name coupon --net back_network coupon-image
             
+

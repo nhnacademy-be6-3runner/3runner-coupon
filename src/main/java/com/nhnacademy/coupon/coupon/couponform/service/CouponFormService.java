@@ -22,6 +22,15 @@ public interface CouponFormService {
     Long create(CreateCouponFormRequest readCouponFormRequest);
 
     /**
+     * 쿠폰 폼 사용.
+     *
+     * @param code id
+     * @return 쿠폰폼 아이디
+     */
+    void use(String code);
+
+
+    /**
      * 쿠폰 폼 읽기.
      *
      * @param couponFormId 쿠폰폼아이디

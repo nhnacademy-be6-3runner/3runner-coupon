@@ -10,6 +10,7 @@ import java.time.ZonedDateTime;
  * @param startDate 시작일
  * @param endDate 만료일
  * @param name 이름
+ * @param quantity 쿠폰 수량
  * @param maxPrice 최대가격
  * @param minPrice 최소가격
  * @param couponTypeId 쿠폰타입아이디
@@ -20,6 +21,7 @@ public record CreateCouponFormRequest(
         ZonedDateTime startDate,
         ZonedDateTime endDate,
         String name,
+        int quantity,
         Integer maxPrice,
         Integer minPrice,
         Long couponTypeId,

@@ -26,6 +26,8 @@ public class CouponForm {
     private ZonedDateTime createdAt;
 
     private String name;
+    @Setter
+    private int quantity;
 
     private UUID code;
     private Integer maxPrice;
@@ -43,10 +45,11 @@ public class CouponForm {
         this.createdAt = ZonedDateTime.now();
     }
 
-    public void setBasicDetails(ZonedDateTime startDate, ZonedDateTime endDate, String name, UUID code, Integer maxPrice, Integer minPrice) {
+    public void setBasicDetails(ZonedDateTime startDate, ZonedDateTime endDate, String name,int quantity, UUID code, Integer maxPrice, Integer minPrice) {
         this.startDate = startDate;
         this.endDate = endDate;
         this.name = name;
+        this.quantity = quantity;
         this.code = code;
         this.maxPrice = maxPrice;
         this.minPrice = minPrice;

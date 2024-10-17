@@ -25,6 +25,6 @@ public class CouponFormListener {
     @RabbitListener(queues = QUEUE_NAME_1)
     public void receiveMessage(String createCouponFormRequestJson) throws JsonProcessingException {
         log.info("{}",createCouponFormRequestJson);
-        couponFormService.create(objectMapper.readValue(createCouponFormRequestJson, CreateCouponFormRequest.class));
+        couponFormService.use(createCouponFormRequestJson);
     }
 }

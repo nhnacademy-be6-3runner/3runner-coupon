@@ -54,6 +54,17 @@ public class CouponFormServiceImpl implements CouponFormService {
     private static final String QUEUE_NAME_1 = "3RUNNER-COUPON-ISSUED";
 
     @Override
+    public void use(String code) {
+        CouponForm couponForm = couponFormRepository.findCouponFormByCode(code)
+                        .orElseThrow(
+                                () -> new CouponFormNotExistException("쿠폰이 존재 하지 않습니다.")
+                        );
+        couponForm.setQuantity(couponForm.getQuantity() - 1);
+        log.info("쿠폰 수량 차감 : {}", couponForm.getQuantity() - 1);
+        couponFormRepository.save(couponForm);
+    }
+
+    @Override
     public Long create(CreateCouponFormRequest createCouponFormRequest) {
         CouponUsage couponUsage = couponUsageRespository
                 .findById(createCouponFormRequest.couponUsageId())
@@ -73,6 +84,7 @@ public class CouponFormServiceImpl implements CouponFormService {
                 createCouponFormRequest.startDate(),
                 createCouponFormRequest.endDate(),
                 createCouponFormRequest.name(),
+                createCouponFormRequest.quantity(),
                 UUID.randomUUID(),
                 createCouponFormRequest.maxPrice(),
                 createCouponFormRequest.minPrice()
